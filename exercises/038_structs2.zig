@@ -41,7 +41,13 @@ pub fn main() void {
     //     experience 20
     //
     // Feel free to run this program without adding Zump. What does
-    // it do and why?
+    // it do and why? > Because it is undefined, so it is filled with uninitialized garbage!
+    chars[1] = Character{
+        .role = Role.bard,
+        .gold = 10,
+        .health = 100,
+        .experience = 20,
+    };
 
     // Printing all RPG characters in a loop:
     for (chars, 0..) |c, num| {
