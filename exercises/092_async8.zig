@@ -29,7 +29,7 @@ pub fn main(init: std.process.Init) !void {
     const io = init.io;
 
     var backing: [4]u32 = undefined;
-    var queue: std.Io.Queue(u32) = .init(&backing);
+    var queue = std.Io.Queue(u32).init(&backing);
 
     var group: std.Io.Group = .init;
 
@@ -43,7 +43,7 @@ fn producer(io: std.Io, queue: *std.Io.Queue(u32)) void {
     // Send numbers 1 through 10 into the queue.
     for (1..11) |i| {
         // What Queue method sends a single element, blocking if full?
-        queue.???(io, @intCast(i)) catch return;
+        queue.putOne(io, @intCast(i)) catch return;
     }
     // Signal that we're done sending.
     queue.close(io);
